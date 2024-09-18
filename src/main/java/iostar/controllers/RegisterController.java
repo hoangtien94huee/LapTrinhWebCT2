@@ -17,10 +17,11 @@ import jakarta.servlet.http.HttpSession;
 public class RegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		HttpSession session = req.getSession(false);
-	 if (session != null && session.getAttribute("username") != null) {
-		 resp.sendRedirect(req.getContextPath() + "/admin");
-		return;
+		if (session != null && session.getAttribute("username") != null) {
+				resp.sendRedirect(req.getContextPath() + "/admin");
+			return;
 		}
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
@@ -34,7 +35,9 @@ public class RegisterController extends HttpServlet {
 			}
 		}
 		req.getRequestDispatcher("views/Register.jsp").forward(req, resp);
+
 	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
@@ -58,7 +61,7 @@ public class RegisterController extends HttpServlet {
 			req.getRequestDispatcher("views/Register.jsp").forward(req, resp);
 			return;
 		}
-		boolean isSuccess = service.register(email,username, fullname, password, phone);
+		boolean isSuccess = service.register(email, username, fullname, password, phone);
 		if (isSuccess) {
 			req.setAttribute("alert", alertMsg);
 			resp.sendRedirect(req.getContextPath() + "/login");

@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet(urlPatterns = "/login")
 
 public class LoginController extends HttpServlet {
+// login do get lấy dữ liệu từ server mà k ảnh hưởng đến trạng thái 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("account") != null) {
@@ -38,6 +39,7 @@ public class LoginController extends HttpServlet {
 		req.getRequestDispatcher("views/login.jsp").forward(req, resp);
 	}
 	@Override
+	// do post thực hiện để gửi dữ liệu đến server làm thay đổi trạng thái cho server
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
@@ -84,6 +86,9 @@ public class LoginController extends HttpServlet {
 			 cookie.setMaxAge(30*60);
 			 response.addCookie(cookie);
 			 }
+	
+	
+
 	public static final String SESSION_USERNAME = "username";
 	public static final String COOKIE_REMEMBER = "username";
 

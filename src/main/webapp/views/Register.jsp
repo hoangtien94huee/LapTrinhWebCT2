@@ -8,6 +8,7 @@
     <title>Form Đăng Ký</title>
     <style>
         body {
+        
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -56,7 +57,7 @@
     </style>
 </head>
 <body>
-    <div class="form-container">
+    	<div class="form-container">
         <h2>Đăng Ký</h2>
         <form action="Register" method="post">
             <label for="email">Email:</label>
@@ -79,6 +80,6 @@
 
             <button type="submit">Đăng Ký</button>
         </form>
-    </div>
+    	</div>
 </body>
 </html>

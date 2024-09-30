@@ -34,7 +34,7 @@ public class RegisterController extends HttpServlet {
 				}
 			}
 		}
-		req.getRequestDispatcher("views/Register.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/Register.jsp").forward(req, resp);
 
 	}
 
@@ -52,13 +52,13 @@ public class RegisterController extends HttpServlet {
 		if (service.checkExistEmail(email)) {
 			alertMsg = "Email đã tồn tại!";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("views/Register.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/Register.jsp").forward(req, resp);
 			return;
 		}
 		if (service.checkExistUsername(username)) {
 			alertMsg = "Tài khoản đã tồn tại!";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("views/Register.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/Register.jsp").forward(req, resp);
 			return;
 		}
 		boolean isSuccess = service.register(email, username, fullname, password, phone);
@@ -68,7 +68,7 @@ public class RegisterController extends HttpServlet {
 		} else {
 			alertMsg = "System error!";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("views/Register.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/Register.jsp").forward(req, resp);
 		}
 	}
 }

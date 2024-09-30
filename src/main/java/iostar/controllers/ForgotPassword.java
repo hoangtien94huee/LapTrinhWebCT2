@@ -26,7 +26,7 @@ public class ForgotPassword extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("views/forgetpassword.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/forgetpassword.jsp").forward(request, response);
 	}
 
 	@Override
@@ -43,16 +43,16 @@ public class ForgotPassword extends HttpServlet {
 
 			if (isUpdated) {
 				request.setAttribute("message", "Mật khẩu đã được cập nhật thành công.");
-				request.getRequestDispatcher("views/login.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 			} else {
 
 				request.setAttribute("error", "Cập nhật mật khẩu thất bại. Vui lòng thử lại.");
-				request.getRequestDispatcher("views/forgetpassword.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/forgetpassword.jsp").forward(request, response);
 			}
 		} else {
 
 			request.setAttribute("error", "Mật khẩu và mật khẩu xác nhận không trùng khớp.");
-			request.getRequestDispatcher("views/forgetpassword.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/forgetpassword.jsp").forward(request, response);
 		}
 	}
 

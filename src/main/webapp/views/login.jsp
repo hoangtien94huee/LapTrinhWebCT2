@@ -1,156 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="checkbox"] {
-            margin-right: 10px;
-        }
-        .remember-me {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .links a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .links a:hover {
-            text-decoration: underline;
-        }
-        .error {
-            color: red;
-            font-size: 0.9em;
-            margin: 5px 0;
-        }
-        .password-container {
-            position: relative;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #007bff;
-            background: none;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Login</h2>
-        <form id="loginForm" action="login" method="post" onsubmit="return validateForm()">
-            <input type="text" id="username" name="username" placeholder="Username"><br>
-            <span id="usernameError" class="error"></span>
-            
-            <div class="password-container">
-                <input type="password" id="password" name="password" placeholder="Password"><br>
-                <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <div class="content-form-page">
+              <div class="row">
+                <div class="col-md-7 col-sm-7">
+                <c:if test ="${alert != null }">
+<h3 class="alert alert danger ">${alert}</h3>  
+                </c:if>
+                  <form action="${pageContext.request.contextPath}/login" method="post" class="form-horizontal form-without-legend" role="form">
+                    <div class="form-group">
+                      <label for="email" class="col-lg-4 control-label">Username <span class="require">*</span></label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="username" name = "username" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="password" name ="password" >
+                         <input type="checkbox" checked = "checked" name="rememberMe"> Remember me <!-- Nút nhớ tôi -->
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-8 col-md-offset-4 padding-left-0">
+                        <a href="${pageContext.request.contextPath}/forgetpassword">Forget Password?</a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 padding-right-30">
+                        <hr>
+                        <div class="login-socio">
+                            <p class="text-muted">or login using:</p>
+                            <ul class="social-icons">
+                                <li><a href="#" data-original-title="facebook" class="facebook" title="facebook"></a></li>
+                                <li><a href="#" data-original-title="Twitter" class="twitter" title="Twitter"></a></li>
+                                <li><a href="#" data-original-title="Google Plus" class="googleplus" title="Google Plus"></a></li>
+                                <li><a href="#" data-original-title="Linkedin" class="linkedin" title="LinkedIn"></a></li>
+                            </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-md-4 col-sm-4 pull-right">
+                  <div class="form-info">
+                    <h2><em>Important</em> Information</h2>
+                    <p>Duis autem vel eum iriure at dolor vulputate velit esse vel molestie at dolore.</p>
+
+                    <button type="button" class="btn btn-default">More details</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <span id="passwordError" class="error"></span>
-            
-            <div class="remember-me">
-                <input type="checkbox" name="rememberMe"> Nhớ tôi <!-- Nút nhớ tôi -->
-            </div>
-            <input type="submit" class="button" value="Login">
-        </form>
+          </div>
+          <!-- END CONTENT -->
 
-        <div class="links">
-            <a href="Register">Register</a>
-            <a href="forgetpassword">forgetpassword</a>
-        </div>
-    </div>
 
-    <script>
-        // Toggle password visibility
-        function togglePassword() {
-            var passwordField = document.getElementById('password');
-            var toggleButton = document.querySelector('.toggle-password');
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleButton.textContent = "Hide";
-            } else {
-                passwordField.type = "password";
-                toggleButton.textContent = "Show";
-            }
-        }
 
-        // Form validation
-        function validateForm() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            var isValid = true;
 
-            // Clear previous error messages
-            document.getElementById('usernameError').textContent = '';
-            document.getElementById('passwordError').textContent = '';
 
-            // Validate username
-            if (username === "") {
-                document.getElementById('usernameError').textContent = 'Username is required';
-                isValid = false;
-            }
 
-            // Validate password
-            if (password === "") {
-                document.getElementById('passwordError').textContent = 'Password is required';
-                isValid = false;
-            }
 
-            return isValid;
-        }
-    </script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+

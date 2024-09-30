@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class LoginController extends HttpServlet {
 // login do get lấy dữ liệu từ server mà k ảnh hưởng đến trạng thái 
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("account") != null) {
@@ -36,7 +37,7 @@ public class LoginController extends HttpServlet {
 				}
 			}
 		}
-		req.getRequestDispatcher("views/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
 	}
 	@Override
 	// do post thực hiện để gửi dữ liệu đến server làm thay đổi trạng thái cho server
@@ -46,12 +47,12 @@ public class LoginController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		boolean isRememberMe = false;
-		String remember = req.getParameter("remember");
+	//	boolean isRememberMe = false;
+		boolean remember = req.getParameter("rememberMe") != null;
 
-		if ("on".equals(remember)) {
-			isRememberMe = true;
-		}
+//		if ("on".equals(remember)) {
+//			isRememberMe = true;
+//		}
 		String alertMsg = "";
 		if(username == null) {
 			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
@@ -69,7 +70,7 @@ public class LoginController extends HttpServlet {
 		if (user != null) {
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
-					  if(isRememberMe){
+					  if(remember){
 					  saveRemeberMe(resp, username);
 					  }
 
@@ -82,8 +83,9 @@ public class LoginController extends HttpServlet {
 	}
 	private void saveRemeberMe(HttpServletResponse response, String
 			username){
-			 Cookie cookie = new Cookie("/views/login.jsp", username);	
-			 cookie.setMaxAge(30*60);
+			 Cookie cookie = new Cookie(SESSION_USERNAME, username);	
+			 cookie.setMaxAge(10);
+			 cookie.setPath("/");
 			 response.addCookie(cookie);
 			 }
 	

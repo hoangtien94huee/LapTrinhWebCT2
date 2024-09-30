@@ -109,8 +109,8 @@
             </div>
             <span id="passwordError" class="error"></span>
             
-            <div class="remember-me">
-                <input type="checkbox" name="rememberMe"> Nhớ tôi <!-- Nút nhớ tôi -->
+            <div class="remember">
+                <input type="checkbox" name="remember"> Nhớ tôi <!-- Nút nhớ tôi -->
             </div>
             <input type="submit" class="button" value="Login">
         </form>
